@@ -1,0 +1,10 @@
+timings 8am to 4 pm.
+
+ambulance available yes.
+
+ambulance number 90909090 .
+
+specialities
+cardio
+gynec
+general.

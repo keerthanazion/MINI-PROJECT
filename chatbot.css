@@ -1,0 +1,96 @@
+/* General Reset and Layout */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5; /* Light grey background for a softer look */
+}
+
+/* Chat Container Styling */
+.chat-container {
+    background-color: #ffffff; /* White background for the chat area */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Slightly enhanced shadow for better depth */
+    width: 100%;
+    max-width: 500px; /* Increased max-width for better visibility */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd; /* Subtle border to define the container */
+}
+
+/* Chat Box Styling */
+#chat-box {
+    flex-grow: 1;
+    height: 400px; /* Increased height for better conversation visibility */
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd; /* Light border to separate messages from input */
+    padding: 15px;
+    margin-bottom: 15px;
+    background: linear-gradient(to top, #f7f9fc, #ffffff); /* Light gradient for a modern look */
+    border-radius: 8px;
+}
+
+/* Message Styling */
+.message {
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+    max-width: 80%; /* Adjusted for a more balanced look */
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.message.user {
+    background-color: #d1e7dd; /* Light green for user messages */
+    align-self: flex-end;
+    text-align: right;
+}
+
+.message.bot {
+    background-color: #e9ecef; /* Light grey for bot messages */
+    align-self: flex-start;
+    text-align: left;
+}
+
+/* Input Container Styling */
+.input-container {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd; /* Border to separate input area from chat box */
+    padding-top: 10px;
+}
+
+/* Input Field Styling */
+#user-input {
+    width: calc(100% - 110px); /* Adjusted width for better alignment */
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd; /* Light border to match overall design */
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inset shadow for depth */
+}
+
+/* Button Styling */
+button {
+    padding: 10px 15px; /* Slightly increased padding for better button appearance */
+    border: none;
+    background-color: #007bff; /* Blue background for primary action */
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue for hover effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+button:focus {
+    outline: none; /* Remove default outline on focus */
+}

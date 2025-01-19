@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --green: #418b3f;
+    --black: #444;
+    --light-color: #777;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Updated shadow for better definition */
+    --border: .2rem solid var(--green);
+}
+
+body {
+    background-color: #f9f9f9; 
+    font-family: 'Poppins', sans-serif;
+    color: var(--black);
+    margin: 0;
+    padding: 0;
+}
+
+.image1, .image2, .image3, .image4, .image5, .image6 {
+    margin: 10px;
+    box-shadow: var(--box-shadow);
+    object-fit: cover;
+}
+
+.image1, .image5 {
+    height: 15rem;
+    width: 15rem;
+}
+
+.image2 {
+    height: 20rem;
+    width: 25rem;
+}
+
+.image3 {
+    height: 20rem;
+    width: 30rem;
+}
+
+.image4, .image6 {
+    height: 15rem;
+    width: 15rem;
+}
+
+.para {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: var(--green);
+    margin: 1rem 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--green);
+}
+
+.section {
+    padding: 2rem;
+}
+
+.service-box {
+    background-color: white;
+    border: var(--border);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow); /* More defined shadow */
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+}
+
+.service-box:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}

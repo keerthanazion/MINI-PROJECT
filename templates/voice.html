@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu Voice Assistant</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #28a745;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .chatbot-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .voice-input-button {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.5em;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: 20px; /* Space from the chatbox */
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .voice-input-button:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        .chatbox {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 15px;
+            height: 400px;
+            width: 100%;
+            max-width: 100%;
+            overflow-y: auto;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Align messages to the end */
+        }
+
+        .user-message, .assistant-message {
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: inline-block;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            background-color: #e0f7fa;
+            color: #00796b;
+            text-align: right;
+            float: right;
+        }
+
+        .assistant-message {
+            background-color: #fce4ec;
+            color: #c2185b;
+            text-align: left;
+            float: left;
+        }
+
+        .record-message {
+            margin-top: 10px;
+            color: #4b0082;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>తెలుగు వాయిస్ అసిస్టెంట్</h1>
+    <div class="chatbot-container">
+        <div class="chatbox" id="chatbox">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <button class="voice-input-button" onclick="startVoiceRecognition()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M12 14c1.65 0 3-1.35 3-3v-5c0-1.65-1.35-3-3-3s-3 1.35-3 3v5c0 1.65 1.35 3 3 3zm5.71-3.71c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41.18.18.44.29.71.29s.53-.11.71-.29c.38-.39.38-1.02-.01-1.41zM19 11h-1v-3c0-2.76-2.24-5-5-5s-5 2.24-5 5v3h-1c-1.1 0-2 .9-2 2v4h14v-4c0-1.1-.9-2-2-2zm-7 8v-2h2v2h-2zM8 20h8v2h-8z"/></svg>
+        </button>
+        <div class="record-message">రికార్డు చేయడానికి క్లిక్ చేయండి</div>
+    </div>
+
+    <script>
+        function startVoiceRecognition() {
+            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'te-IN';  // Setting language to Telugu
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript;
+                console.log('మీరు చెప్పినది: ' + transcript);
+                var userMessageElement = document.createElement('div');
+                userMessageElement.className = 'user-message';
+                userMessageElement.innerText = 'మీరు: ' + transcript;
+                document.getElementById('chatbox').appendChild(userMessageElement);
+
+                fetch('/voice_query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: transcript })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var answer = data.answer;
+                    var assistantMessageElement = document.createElement('div');
+                    assistantMessageElement.className = 'assistant-message';
+                    assistantMessageElement.innerText = 'సహాయకుడు: ' + answer;
+                    document.getElementById('chatbox').appendChild(assistantMessageElement);
+                    speak(answer);
+                })
+                .catch(error => console.error('పొరపాటు:', error));
+            };
+
+            recognition.onerror = function(event) {
+                console.error('శోధనలో పొరపాటు: ' + event.error);
+            };
+
+            recognition.start();
+        }
+
+        function speak(text) {
+            var utterance = new SpeechSynthesisUtterance();
+            utterance.text = text;
+            utterance.lang = 'te-IN'; // Setting language to Telugu
+            utterance.pitch = 1;
+            utterance.rate = 1;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
