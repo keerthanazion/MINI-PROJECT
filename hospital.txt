@@ -1,10 +1,13 @@
-timings 8am to 4 pm.
+Hospital timings are 8am to 4 pm.
 
-ambulance available yes.
+Yes,ambulance is avaliable today 24/7
 
-ambulance number 90909090 .
+Ambulance phone number 9090909090.
 
-specialities
-cardio
-gynec
-general.
+Our Specialities are:
+General
+Gynecology
+Ayurveda
+Homeopathy
+Physiotherapy
+Dental
